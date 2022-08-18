@@ -14,8 +14,16 @@ Template Name: Courses
 
             <?php
             $isFirst = true;
+            $term_ids = get_terms([
+                'fields' => 'ids',
+                'taxonomy' => 'category',
+                'name' => 'zajecia-grafik',
+                'hide_empty' => false,
+            ]);
+            $course_category_id = $term_ids[0];
 
-            $descendant = array('child_of' => 5);
+
+            $descendant = array('child_of' => $course_category_id);
             $categories = get_categories($descendant);
             foreach ($categories as $category) : ?>
 
@@ -46,7 +54,10 @@ Template Name: Courses
         <div class="tab-content" id="pills-tabContent">
 
             <?php
-            $descendant = array('child_of' => 5);
+
+
+
+            $descendant = array('child_of' => $course_category_id);
             $categories = get_categories($descendant);
             foreach ($categories as $category) : ?>
 
